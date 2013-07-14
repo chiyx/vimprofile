@@ -52,3 +52,7 @@ let g:miniBufExplMapCTabSwitchBufs=1
 nnoremap <silent> <F3> :Rgrep<CR>
 "pydiction配置
 let g:pydiction_location='~/.vim/dict/complete-dict'
+inoremap <silent><C-h> <Left>
+inoremap <silent><C-j> <Down>
+inoremap <silent><C-k> <Up>
+inoremap <silent><C-l> <Right>
