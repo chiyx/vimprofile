@@ -18,14 +18,14 @@ imap <c-s> <c-o>:w<cr>
 "Vundle插件管理 {
     filetype off    "required
     "set the runtime path to include Vundle and initialize
-    set rtp += ~/.vim/bundle/Vundle.vim
-    call vundle#begin()
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin('~/.vim/vundle')
     " let Vundle manage Vundle, required
     Plugin 'gmarik/Vundle.vim'
     "括号自动补全插件
     Plugin 'Raimondi/delimitMate'
 
-    call Vundle#end()   "required
+    call vundle#end()   "required
     filetype plugin on
     filetype plugin indent on   "required
 
