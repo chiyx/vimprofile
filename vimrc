@@ -63,10 +63,10 @@ imap <c-s> <c-o>:w<cr>
     "set the runtime path to include Vundle and initialize
 	if g:islinux
 		set rtp+=~/.vim/bundle/vundle_vim
-		call vundle#begin('~/.vim/vundle')
+		call vundle#begin('~/.vim/vundle_plugins')
 	else
 		set rtp+=$VIM/vimfiles/bundle/vundle_vim/
-		call vundle#begin('$VIM/vimfiles/vundle')
+		call vundle#begin('$VIM/vimfiles/vundle_plugins')
 	endif
 	
     " let Vundle manage Vundle, required
