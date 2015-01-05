@@ -39,13 +39,26 @@ set encoding=utf-8
 set fencs=utf-8,gbk,gb2312,latin1
 set noswapfile
 set nobackup
-set nu
-set ruler
 set shiftwidth=4
 set softtabstop=4
 set expandtab
-set cindent
 syntax on
+
+"显示设置 {
+    set number
+    set ruler
+    set showcmd
+    set showmode
+    set showmatch
+"}
+
+"缩进配置 {
+    set smartindent
+    set autoindent
+"}
+"激活内置的插件 {
+    runtime macros/matchit.vim
+"}
 
 "设置配色主题 {
     if g:isGUI
@@ -54,9 +67,24 @@ syntax on
         colorscheme xoria256
     endif
 "}
-"保存快捷键
-map <c-s> :w<cr>
-imap <c-s> <c-o>:w<cr>
+
+"保存快捷键 {
+    map <c-s> :w<cr>
+    imap <c-s> <c-o>:w<cr>
+"}
+
+"无限undo {
+    if has("persistent_undo") 
+        set undolevels=1000
+        set undoreload=10000
+        set undofile
+        if g:islinux
+            set undodir=~/.vim/tmp/vimundo/
+        else
+            set undodir=$VIM/vimfiles/tmp/vimundo/
+        endif 
+    endif 
+"}
 
 "Vundle插件管理 {
     filetype off    "required
@@ -75,6 +103,46 @@ imap <c-s> <c-o>:w<cr>
     Plugin 'Raimondi/delimitMate'
     "添加包围的符号
     Plugin 'tpope/vim-surround'
+    "通过[前缀了一些常用的命令 
+    Plugin 'tpope/vim-unimpaired'
+    "json高亮插件
+    Plugin 'elzr/vim-json'
+    "html,css编辑插件
+    Plugin 'mattn/emmet-vim'
+        "enable in insert and visual mode   
+        let g:user_emmet_mode='iv'
+        "enable just for html,xml,css 
+        let g:user_emmet_install_global = 0
+        autocmd FileType xml,html,css EmmetInstall
+
+    "显示缩进对齐虚线插件
+    Plugin 'Yggdroot/indentLine'
+        let g:indentLine_char = "┊"
+        let g:indentLine_first_char = "┊" 
+        let g:indentLine_color_term = 239
+        let g:indentLine_color_gui = '#A4E57E'
+        nmap <leader>il :IndentLinesToggle<CR>
+
+    "git插件
+    Plugin 'tpope/vim-fugitive'
+
+    "一款好看的状态栏插件
+    Plugin 'bling/vim-airline'
+        set laststatus=2
+        let g:airline_symbols = {}
+        let g:airline_powerline_fonts = 1
+        let g:airline_enable_fugitive=1
+        let g:airline_section_c="%t"
+        let g:airline_section_x="%y"
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline#extensions#whitespace#enabled = 0
+        let g:airline_left_sep = '▶'
+        let g:airline_right_sep = '◀'
+        let g:airline_symbols.linenr = 'L'
+        let g:airline_symbols.branch = '⎇'
+        let g:airline_symbols.paste = 'Þ'
+        let g:airline_symbols.whitespace = 'Ξ'
+    
 
     call vundle#end()   "required
     filetype plugin on
