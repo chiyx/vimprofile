@@ -34,7 +34,6 @@ endif
 "}
 
 set t_Co=256
-set background=dark
 set encoding=utf-8
 set fencs=utf-8,gbk,gb2312,latin1
 set noswapfile
@@ -45,6 +44,7 @@ set expandtab
 syntax on
 
 "显示设置 {
+    set relativenumber
     set number
     set ruler
     set showcmd
@@ -61,11 +61,19 @@ syntax on
 "}
 
 "设置配色主题 {
-    if g:isGUI
-        colorscheme desert
-    else
-        colorscheme xoria256
-    endif
+    syntax enable
+    set background=dark
+    let g:solarized_termtrans=1
+    let g:solarized_termcolors=256
+    "terminal下面的背景问题
+    let g:solarized_contrast="high"
+    let g:solarized_visibility="high"
+    colorscheme solarized
+"    if g:isGUI
+"        colorscheme desert
+"    else
+"        colorscheme xoria256
+"    endif
 "}
 
 "保存快捷键 {
@@ -136,13 +144,22 @@ syntax on
         let g:airline_section_x="%y"
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#whitespace#enabled = 0
-        let g:airline_left_sep = '▶'
-        let g:airline_right_sep = '◀'
-        let g:airline_symbols.linenr = 'L'
-        let g:airline_symbols.branch = '⎇'
+        let g:airline_left_sep = '»'
+        let g:airline_right_sep = '«'
+        let g:airline_symbols.linenr = '¶'
+        let g:airline_symbols.branch = 'Ý'
         let g:airline_symbols.paste = 'Þ'
         let g:airline_symbols.whitespace = 'Ξ'
     
+    "树形文件列表插件
+    Plugin 'scrooloose/nerdtree'
+        "当只剩该文件窗口时，关闭vim
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")  && b:NERDTreeType == "primary") | q | endif 
+        map <C-n> :NERDTreeToggle<CR>
+        let NERDChristmasTree=1
+        let NERDTreeShowHidden=1
+        let NERDTreeShowLineNumbers=1
+
 
     call vundle#end()   "required
     filetype plugin on
