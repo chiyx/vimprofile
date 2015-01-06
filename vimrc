@@ -33,6 +33,11 @@ endif
         \endif<cr>
 "}
 
+"调整mapleader {
+    let mapleader=','
+    noremap \ ,
+"}
+
 set t_Co=256
 set encoding=utf-8
 set fencs=utf-8,gbk,gb2312,latin1
@@ -41,6 +46,7 @@ set nobackup
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+set autoread    "当文件变更时自动加载
 syntax on
 
 "显示设置 {
@@ -50,6 +56,8 @@ syntax on
     set showcmd
     set showmode
     set showmatch
+    set list
+    set listchars=tab:▸\ ,trail:▫"
 "}
 
 "缩进配置 {
@@ -86,40 +94,47 @@ syntax on
         set undolevels=1000
         set undoreload=10000
         set undofile
-        if g:islinux
-            set undodir=~/.vim/tmp/vimundo/
-        else
-            set undodir=$VIM/vimfiles/tmp/vimundo/
-        endif 
-    endif 
+   endif 
+"}
+
+"搜索设置 {
+    set ignorecase
+    set smartcase
+    set incsearch
+"}
+"简化切换窗口焦点快捷键 {
+    noremap <C-h> <C-w>h
+    noremap <C-j> <C-w>j
+    noremap <C-k> <C-w>k
+    noremap <C-l> <C-w>l
 "}
 
 "Vundle插件管理 {
     filetype off    "required
     "set the runtime path to include Vundle and initialize
-	if g:islinux
-		set rtp+=~/.vim/bundle/vundle_vim
-		call vundle#begin('~/.vim/vundle_plugins')
-	else
-		set rtp+=$VIM/vimfiles/bundle/vundle_vim/
-		call vundle#begin('$VIM/vimfiles/vundle_plugins')
-	endif
-	
+    if g:islinux
+        set rtp+=~/.vim/bundle/vundle_vim
+        call vundle#begin('~/.vim/vundle_plugins')
+    else
+        set rtp+=$VIM/vimfiles/bundle/vundle_vim/
+        call vundle#begin('$VIM/vimfiles/vundle_plugins')
+    endif
+
     " let Vundle manage Vundle, required
     Plugin 'gmarik/Vundle.vim'
     "括号自动补全插件
     Plugin 'Raimondi/delimitMate'
     "添加包围的符号
     Plugin 'tpope/vim-surround'
-    "通过[前缀了一些常用的命令 
+    "通过[前缀了一些常用的命令
     Plugin 'tpope/vim-unimpaired'
     "json高亮插件
     Plugin 'elzr/vim-json'
     "html,css编辑插件
     Plugin 'mattn/emmet-vim'
-        "enable in insert and visual mode   
+        "enable in insert and visual mode
         let g:user_emmet_mode='iv'
-        "enable just for html,xml,css 
+        "enable just for html,xml,css
         let g:user_emmet_install_global = 0
         autocmd FileType xml,html,css EmmetInstall
 
@@ -150,7 +165,7 @@ syntax on
         let g:airline_symbols.branch = 'Ý'
         let g:airline_symbols.paste = 'Þ'
         let g:airline_symbols.whitespace = 'Ξ'
-    
+
     "树形文件列表插件
     Plugin 'scrooloose/nerdtree'
         "当只剩该文件窗口时，关闭vim
@@ -160,6 +175,15 @@ syntax on
         let NERDTreeShowHidden=1
         let NERDTreeShowLineNumbers=1
 
+    Plugin 'Lokaltog/vim-easymotion'
+        let g:EasyMotion_do_mapping = 0 "Disable default mappings
+        " Jump to anywhere you want with minimal keystrokes, with just one key binding.
+        nmap <Space> <Plug>(easymotion-s)
+        " Turn on case sensitive feature
+        let g:EasyMotion_smartcase = 1
+        " JK motions: Line motions
+        map <Leader>j <Plug>(easymotion-j)
+        map <Leader>k <Plug>(easymotion-k)
 
     call vundle#end()   "required
     filetype plugin on

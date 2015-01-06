@@ -1,3 +1,6 @@
 .netrwhist
 tmp/
 vundle_plugins/
+
+*.~
+*.un~
