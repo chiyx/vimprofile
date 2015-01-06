@@ -90,9 +90,9 @@ syntax on
 "}
 
 "无限undo {
-    if has("persistent_undo") 
-        set undolevels=1000
-        set undoreload=10000
+    if has("persistent_undo")
+        set undolevels=500
+        set undoreload=1000
         set undofile
    endif 
 "}
