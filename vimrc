@@ -94,7 +94,7 @@ syntax on
         set undolevels=500
         set undoreload=1000
         set undofile
-   endif 
+   endif
 "}
 
 "搜索设置 {
@@ -126,6 +126,12 @@ syntax on
     Plugin 'Raimondi/delimitMate'
     "添加包围的符号
     Plugin 'tpope/vim-surround'
+    "支持.对以下插件的重复操作
+    "surround.vim
+    "speedating.vim
+    "abolish.vim
+    "unimpaired.vim
+    Plugin 'tpope/vim-repeat'
     "通过[前缀了一些常用的命令
     Plugin 'tpope/vim-unimpaired'
     "json高亮插件
@@ -184,6 +190,9 @@ syntax on
         " JK motions: Line motions
         map <Leader>j <Plug>(easymotion-j)
         map <Leader>k <Plug>(easymotion-k)
+
+    ".h&.c/.cpp之间切换
+    Plugin 'a.vim'
 
     call vundle#end()   "required
     filetype plugin on
