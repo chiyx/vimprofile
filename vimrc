@@ -100,13 +100,20 @@ syntax on
 "搜索设置 {
     set ignorecase
     set smartcase
+    set hlsearch
     set incsearch
 "}
+
 "简化切换窗口焦点快捷键 {
     noremap <C-h> <C-w>h
     noremap <C-j> <C-w>j
     noremap <C-k> <C-w>k
     noremap <C-l> <C-w>l
+"}
+"ctags配置 {
+    if g:islinux
+        set tags+=~/.vim/systags
+    endif
 "}
 
 "Vundle插件管理 {
@@ -175,7 +182,7 @@ syntax on
     "树形文件列表插件
     Plugin 'scrooloose/nerdtree'
         "当只剩该文件窗口时，关闭vim
-        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")  && b:NERDTreeType == "primary") | q | endif 
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")  && b:NERDTreeType == "primary") | q | endif
         map <C-n> :NERDTreeToggle<CR>
         let NERDChristmasTree=1
         let NERDTreeShowHidden=1
@@ -190,11 +197,40 @@ syntax on
         " JK motions: Line motions
         map <Leader>j <Plug>(easymotion-j)
         map <Leader>k <Plug>(easymotion-k)
+        map <Leader>w <Plug>(easymotion-w)
 
     ".h&.c/.cpp之间切换
     Plugin 'a.vim'
 
+    "tagbar
+    Plugin 'majutsushi/tagbar'
+        nmap <silent> <F2> :TagbarToggle<CR>
+        let g:tagbar_type_css = {
+                \ 'ctagstype' : 'Css',
+                \ 'kinds'     : [
+                    \ 'c:classes',
+                    \ 's:selectors',
+                    \ 'i:identities'
+                \ ]
+            \ }
+        let g:tagbar_type_scala = {
+                \ 'ctagstype' : 'Scala',
+                \ 'kinds'     : [
+                    \ 'p:packages:1',
+                    \ 'V:values',
+                    \ 'v:variables',
+                    \ 'T:types',
+                    \ 't:traits',
+                    \ 'o:objects',
+                    \ 'a:aclasses',
+                    \ 'c:classes',
+                    \ 'r:cclasses',
+                    \ 'm:methods'
+                \ ]
+            \ }
+
     call vundle#end()   "required
+    filetype on
     filetype plugin on
     filetype plugin indent on   "required
 
