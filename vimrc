@@ -49,6 +49,11 @@ set expandtab
 set autoread    "当文件变更时自动加载
 syntax on
 
+"代码折叠设置 {
+    set fdm=syntax
+    set foldminlines=10
+"}
+
 "显示设置 {
     set relativenumber
     set number
@@ -64,6 +69,7 @@ syntax on
     set smartindent
     set autoindent
 "}
+
 "激活内置的插件 {
     runtime macros/matchit.vim
 "}
@@ -94,6 +100,11 @@ syntax on
         set undolevels=500
         set undoreload=1000
         set undofile
+        if g:islinux
+            set undodir=~/.vim/undo
+        else
+            set undodir=$VIM/vimfiles/undo
+        endif
    endif
 "}
 
@@ -228,6 +239,17 @@ syntax on
                     \ 'm:methods'
                 \ ]
             \ }
+    "c&cpp语法高亮插件
+    Plugin 'vim-jp/cpp-vim'
+
+    Plugin 'OmniCppComplete'
+        let OmniCpp_NamespaceSearch = 1
+        let OmniCpp_GlobalScopeSearch = 1
+        let OmniCpp_ShowAccess = 1
+        let OmniCpp_ShowPrototypeInAbbr = 1 "显示函数参数列表
+        let OmniCpp_MayCompleteDot = 1 "输入 . 后自动补全
+        let OmniCpp_MayCompleteArrow = 1 "输入 -> 后自动补全
+        let OmniCpp_MayCOmpleteScore = 1 "输入 :: 后自动补全
 
     call vundle#end()   "required
     filetype on
@@ -243,4 +265,11 @@ syntax on
         language messages zh_CN.utf-8
     endif 
 "}
+
+"引入自己写的一些脚本 {
+    if g:islinux
+        so ~/.vim/cscope_maps.vim
+    endif
+"}
+
 

@@ -4,5 +4,6 @@ vundle_plugins/
 
 *.~
 *.un~
+%*
 systags
 tags
