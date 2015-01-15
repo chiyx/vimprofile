@@ -24,7 +24,7 @@
     "显示缩进对齐虚线插件
     Plugin 'Yggdroot/indentLine'
         let g:indentLine_char = "┊"
-        let g:indentLine_first_char = "┊" 
+        let g:indentLine_first_char = "┊"
         let g:indentLine_color_term = 239
         let g:indentLine_color_gui = '#A4E57E'
         nmap <leader>il :IndentLinesToggle<CR>
@@ -51,7 +51,8 @@
     "树形文件列表插件
     Plugin 'scrooloose/nerdtree'
         "当只剩该文件窗口时，关闭vim
-        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")  && b:NERDTreeType == "primary") | q | endif
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")
+                    \&& b:NERDTreeType == "primary") | q | endif
         map <C-n> :NERDTreeToggle<CR>
         let NERDChristmasTree=1
         let NERDTreeShowHidden=1
@@ -59,7 +60,8 @@
 
     Plugin 'Lokaltog/vim-easymotion'
         let g:EasyMotion_do_mapping = 0 "Disable default mappings
-        " Jump to anywhere you want with minimal keystrokes, with just one key binding.
+        " Jump to anywhere you want with minimal keystrokes, with just one
+        " key binding.
         nmap <Space> <Plug>(easymotion-s)
         " Turn on case sensitive feature
         let g:EasyMotion_smartcase = 1
@@ -99,6 +101,15 @@
             \ }
     "c&cpp语法高亮插件
     Plugin 'vim-jp/cpp-vim'
+    "file and mru,buffer,tag finder for vim
+    Plugin 'kien/ctrlp.vim'
+        let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.rvm$'
+        set wildignore+=*/tmp/*,*.so,*.zip,*.o,*.obj
+
+    Plugin 'godlygeek/tabular'
+
+    Plugin 'plasticboy/vim-markdown'
+        let g:vim_markdown_no_default_key_mappings=1
 
     call vundle#end()   "required
     filetype on
