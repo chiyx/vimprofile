@@ -38,6 +38,7 @@ endif
     set shiftround
     set noerrorbells
     set noswapfile
+    set nobackup
     set autoread
     set laststatus=2
     set showcmd
